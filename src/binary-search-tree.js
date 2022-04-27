@@ -18,10 +18,10 @@ class BinarySearchTree {
   }
 
   add(data) {
-    this.rootTree = addWithin(this.rootTree, data);
+    this.rootTree = addElement(this.rootTree, data);
 
-    function addWithin(node, data) {
-      if (!node) {
+    function addElement(node, data) {
+      if (node === null) {
         return new Node(data);
       }
 
@@ -30,23 +30,54 @@ class BinarySearchTree {
       }
 
       if (data < node.data) {
-        node.left = addWithin(node.left, data);
+        node.left = addElement(node.left, data);
       } else {
-        node.right = addWithin(node.right, data);
+        node.right = addElement(node.right, data);
       }
-
       return node;
     }
     // remove line with error and write your code here
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
+  has(data) {
+    return hasElement(this.rootTree, data);
+
+    function hasElement(node, data) {
+      if (node === null) {
+        return false;
+      }
+
+      if (node.data === data) {
+        return true;
+      }
+
+      if (data < node.data) {
+        return hasElement(node.left, data);
+      } else {
+        return hasElement(node.right, data);
+      }
+    }
     // remove line with error and write your code here
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
+  find(data) {
+    return findElement(this.rootTree, data);
+
+    function findElement(node, data) {
+      if (node === null) {
+        return null;
+      }
+
+      if (node.data === data) {
+        return node;
+      }
+
+      if (data < node.data) {
+        return findElement(node.left, data);
+      } else {
+        return findElement(node.right, data);
+      }
+    }
     // remove line with error and write your code here
   }
 
@@ -56,12 +87,32 @@ class BinarySearchTree {
   }
 
   min() {
-    throw new NotImplementedError('Not implemented');
+    return minElement(this.rootTree, null);
+
+    function minElement(node) {
+      if (node === null) {
+        return null;
+      }
+      if (node.left === null) {
+        return node.data;
+      }
+      return minElement(node.left);
+    }
     // remove line with error and write your code here
   }
 
   max() {
-    throw new NotImplementedError('Not implemented');
+    return maxElement(this.rootTree, null);
+
+    function maxElement(node) {
+      if (node === null) {
+        return null;
+      }
+      if (node.right === null) {
+        return node.data;
+      }
+      return maxElement(node.right);
+    }
     // remove line with error and write your code here
   }
 }
